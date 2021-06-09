@@ -11,6 +11,7 @@ const ws = new WebSocket('ws://' + connect);
 
 console.log("Started");
 
+textinput.addEventListener('keydown', sendEnter);
 sendButton.addEventListener('click', sendMessage);
 //send message
 function sendMessage() {
@@ -26,6 +27,12 @@ function sendMessage() {
         ws.send(username + ": " + userInput);
     }
     textinput.value = "";
+}
+
+function sendEnter() {
+    if (event.keyCode === 13) {
+        sendMessage();
+    }
 }
 
 //recieve
