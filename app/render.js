@@ -1,29 +1,35 @@
-const textinput = document.getElementById('textinput');
+const nameInput = document.getElementById('nameInput');
+const textinput = document.getElementById('textInput');
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
-const ws = new WebSocket('ws://localhost:6969');
+
+const connect = 'localhost:6969';
+
+const ws = new WebSocket('ws://' + connect);
 
 
 console.log("Started");
 
 sendButton.addEventListener('click', sendMessage);
+//send message
 function sendMessage() {
+    let username = nameInput.value;
     let userInput = textinput.value;
-    console.log(userInput);
 
-    //let tmp = `<div class="output-msg> <span class="current-msg>${userInput}</span></div>`;
-    //chatarea.insertAdjacentHTML("beforeend", tmp);
-
-    ws.send(userInput);
+    if (userInput !== "") {
+        let tmp = `<div class="output-msg"> <span class="current-msg">${"me: "+ userInput}</span></div>`;
+        chatarea.insertAdjacentHTML("beforeend", tmp);
+        ws.send(username + ": " + userInput);
+    }
 
     textinput.value = "";
 }
 
+//recieve
 ws.onmessage = ({ data }) => {
     let serverInput = data;
-    console.log("ws in: ", serverInput);
-    let tmp = `<div class="input-msg> <span class="current-msg>${serverInput}</span></div>`;
+    let tmp = `<div class="input-msg"> <span class="current-msg">${serverInput}</span></div>`;
     chatarea.insertAdjacentHTML("beforeend", tmp);
 };
 
