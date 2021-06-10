@@ -22,9 +22,11 @@ function sendMessage() {
         if(username == "") {
             username = "anon";
         }
-        let tmp = `<div class="output-msg"> <span class="current-msg">${"me: "+ userInput}</span></div>`;
+        let tmp = `<div class="sent-msg"> <p class="current-msg">${userInput}</p> </div>`;
         chatarea.insertAdjacentHTML("beforeend", tmp);
-        ws.send(username + ": " + userInput);
+
+        let dataArray = [username, userInput];
+        ws.send(dataArray);
     }
     textinput.value = "";
 }
@@ -37,7 +39,10 @@ function sendEnter() {
 
 //recieve
 ws.onmessage = ({ data }) => {
-    let serverInput = data;
-    let tmp = `<div class="input-msg"> <span class="current-msg">${serverInput}</span></div>`;
+    let dataArray = data.split(",");
+    let username = dataArray[0];
+    let userInput = dataArray[1];
+    console.log(data);
+    let tmp = `<span class="username">${username}</span><div class="recieved-msg"><p class="current-msg">${userInput}</p> </div>`;
     chatarea.insertAdjacentHTML("beforeend", tmp);
 };

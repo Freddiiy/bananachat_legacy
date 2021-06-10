@@ -14,7 +14,7 @@ const createWindow = () => {
     icon: __dirname + './assets/icon.png', 
     webPreferences: {
       nodeIntegration: true,
-      devTools: false
+      devTools: true
     }
   });
 
