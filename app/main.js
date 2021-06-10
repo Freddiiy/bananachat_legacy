@@ -9,12 +9,13 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    titleBarStyle: 'hidden',
     width: 800,
     height: 600,
     icon: __dirname + './assets/icon.png', 
     webPreferences: {
       nodeIntegration: true,
-      devTools: false
+      devTools: true
     }
   });
 

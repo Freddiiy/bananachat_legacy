@@ -5,9 +5,7 @@ const textinput = document.getElementById('textInput');
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
-//const connect = '83.94.37.212:6969';
-
-//const ws = new WebSocket('ws://' + connect);
+var firstRun = true;
 var ws = new WebSocket('ws://localhost:6965');
 
 console.log("Started");
@@ -19,6 +17,17 @@ sendButton.addEventListener('click', sendMessage);
 connect.addEventListener('keydown', connectToWS);
 function connectToWS() {
     if (event.keyCode === 13) {
+        console.log(firstRun);
+        if (!firstRun) {
+            ws.close();
+        }
+        firstRun = false;
+
+        ws.onclose = () => {
+            console.log("Connection disconnected...");
+            let tmp = `<div class="connected"> <p class="current-msg">You have been disconnected.</p> </div>`;
+            chatarea.insertAdjacentHTML("beforeend", tmp);
+        }
         ws = new WebSocket('ws://' + connect.value);
         console.log("Connecting to " + connect.value + "...");
         ws.onopen = () => {
