@@ -1,9 +1,8 @@
-const WebSocket = require('ws');
 const express = require('express');
 const app = express();
+const WebSocket = require('ws');
 
-const appPort = process.env.PORT || 80;
-const port = process.env.PORT ||6969;
+const port = process.env.PORT || 80;
 
 //serves the webpage
 app.use(express.static("public"));
@@ -12,11 +11,8 @@ app.get('*', function(req, res) {
   console.log("serving webpage");
 });
 
-app.listen(appPort);
-console.log("Website live on: " + appPort);
-
 //backend websocket
-const wss = new WebSocket.Server({ port: port });
+const wss = new WebSocket.Server({ noServer: true });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(dataArray) {
@@ -32,4 +28,12 @@ wss.on('connection', function connection(ws) {
     console.log(username + ' says: ' + userInput);
   });
 });
+
+const server = app.listen(port);
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, socket => {
+    wss.emit('connection', socket, request);
+  });
+});
+
 console.log("listening on port: " + port);

@@ -5,8 +5,10 @@ const textinput = document.getElementById('textInput');
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
+//var HOST = location.origin.replace(/^https/, 'wss');
+var HOST = 'ws://localhost.com:6969';
 var firstRun = true;
-var ws = new WebSocket('ws://localhost:6965');
+var ws = new WebSocket(HOST);
 
 console.log("Started");
 
@@ -28,7 +30,9 @@ function connectToWS() {
             let tmp = `<div class="connected"> <p class="current-msg">You have been disconnected.</p> </div>`;
             chatarea.insertAdjacentHTML("beforeend", tmp);
         }
-        ws = new WebSocket('ws://' + connect.value);
+        if (connect.value !== "") {
+            ws = new WebSocket('ws://' + connect.value);
+        }
 
         console.log("Connecting to " + connect.value + "...");
         ws.onopen = () => {
