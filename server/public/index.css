@@ -45,6 +45,40 @@ body::-webkit-scrollbar {
   align-self: flex-end;
 }
 
+.switch {
+  position: relative;
+  display: inline-block;
+  top: 7px;
+  margin-left: -7px;
+  width: 20px;
+  height: 20px;
+  position: fixed;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.securetoggle {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .securetoggle {
+  background-color: #10e650;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
 #rightbox {
   line-height: 1.5;
   position: fixed;

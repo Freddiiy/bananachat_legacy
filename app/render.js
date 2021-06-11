@@ -1,11 +1,11 @@
 const connect = document.getElementById('ipinput');
+const checkbox = document.getElementById('checkbox');
 
 const nameInput = document.getElementById('nameInput');
 const textinput = document.getElementById('textInput');
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
-//var HOST = location.origin.replace(/^https/, 'wss');
 var HOST = 'ws://localhost.com:6969';
 var firstRun = true;
 var ws = new WebSocket(HOST);
@@ -31,7 +31,11 @@ function connectToWS() {
             chatarea.insertAdjacentHTML("beforeend", tmp);
         }
         if (connect.value !== "") {
-            ws = new WebSocket('ws://' + connect.value);
+            if (checkbox.checked) {
+                ws = new WebSocket('wss://' + connect.value);
+            } else if (!checkbox.checked) {
+                ws = new WebSocket('ws://' + connect.value);
+            }
         }
 
         console.log("Connecting to " + connect.value + "...");
@@ -79,14 +83,4 @@ function recieveMessage() {
         let tmp = `<span class="username">${username}</span><div class="recieved-msg"><p class="current-msg">${userInput}</p> </div>`;
         chatarea.insertAdjacentHTML("beforeend", tmp);
     };
-}
-
-ws.onopen = () => {
-    console.log("WEBSOCKET OPEN");
-}
-ws.onclose = () => {
-    console.log("WEBSOCKET OPEN");
-}
-ws.onerror = () => {
-    console.log("WEBSOCKET ERROR");
 }
