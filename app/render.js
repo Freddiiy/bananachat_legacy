@@ -6,7 +6,7 @@ const textinput = document.getElementById('textInput');
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
-var HOST = 'ws://localhost.com:6969';
+var HOST = 'wss://localhost.com:6969';
 var firstRun = true;
 var ws = new WebSocket(HOST);
 
