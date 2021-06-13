@@ -9,14 +9,14 @@
     <script defer src="render.js"></script>
   </head>
   <body>
-    <div class="chatbox-header">
+    <div class="container-header">
       <ul id="apptitle">Banana chat</ul>
       <div class="chatbox" id="chatbox">
         <ul class="chatarea" id="chatarea">
 
         </ul>
         <div id="middlebox">
-          <input type="text" id="ipinput" placeholder="Enter ip">
+          <input type="text" id="ipinput" placeholder="Enter host">
           <label class="switch">
             <input type="checkbox" id='checkbox'>
             <span class="securetoggle"></span>
@@ -26,6 +26,8 @@
           <input type="text" id="nameInput" placeholder="Enter name">
         </div>
         <input type="text" id="textInput" placeholder="Enter message...">
+        <label for="img">Select image</label>
+        <input type=file id="file-selector" name="img" accept="image/*">
         <button type="submit" id="sendButton" class="submit">Send</button>
       </div>
     </div>

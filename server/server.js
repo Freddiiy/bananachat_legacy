@@ -20,13 +20,17 @@ wss.on('connection', function connection(ws) {
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(dataArray);
-        console.log("data sent back: ", dataArray);
       }
     })
     let data = JSON.parse(dataArray);
-    let username = data[0];
-    let userInput = data[1];
-    console.log(username + ' says: ' + userInput);
+    if (data[0] == "message") {
+      let username = data[1];
+      let userInput = data[2];
+      console.log('type: ' + data[0] + ' ' + username + ' says: ' + userInput);
+    } else if (data[0] == "file") {
+      let username = data[1];
+      console.log('type: ' + data[0] + ' from ' + username);
+    }
   });
 });
 
