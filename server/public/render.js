@@ -15,7 +15,7 @@ const url = window.location.href;
 var HOST = url.replace(/(http)(s)?\:\/\//, "ws$2://");
 console.log();
 var firstRun = true;
-var ws = new WebSocket('ws://localhost:80');
+var ws = new WebSocket(HOST);
 var imageNum = 0;
 var connected = false;
 
@@ -24,8 +24,6 @@ console.log("Started");
 fileSelector.addEventListener('change', imagePreview);
 textinput.addEventListener('keydown', sendEnter);
 sendButton.addEventListener('click', sendMessage);
-
-startCall.addEventListener('click', voicecall);
 
 connect.addEventListener('keydown', connectToWS);
 function connectToWS() {

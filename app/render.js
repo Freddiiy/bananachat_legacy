@@ -25,8 +25,6 @@ fileSelector.addEventListener('change', imagePreview);
 textinput.addEventListener('keydown', sendEnter);
 sendButton.addEventListener('click', sendMessage);
 
-startCall.addEventListener('click', voicecall);
-
 connect.addEventListener('keydown', connectToWS);
 function connectToWS() {
     if (event.keyCode === 13) {
