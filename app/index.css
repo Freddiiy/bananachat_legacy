@@ -84,21 +84,18 @@ input:checked + .securetoggle {
   top: 0;
   background: rgb(58, 58, 58);
   color: white;
-  margin-left: 700px;
-  padding-right: 0;
   align-self: flex-end;
 }
 #nameInput {
   line-height: 1.5;
-  width: 250px;
+  width: 230px;
   background: rgb(58, 58, 58);
   color: white;
   font-size: 1.5rem;
   outline: none;
   border: none;
   padding: 0 10px;
-  left: 0;
-  align-self: flex;
+  align-self: flex-end;
 }
 
 #textInput {

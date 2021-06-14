@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const WebSocket = require('ws');
 
-
 const port = process.env.PORT || 80;
 
 //serves the webpage

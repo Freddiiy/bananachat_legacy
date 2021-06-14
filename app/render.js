@@ -1,4 +1,3 @@
-const connect = document.getElementById('ipinput');
 const checkbox = document.getElementById('checkbox');
 
 const nameInput = document.getElementById('nameInput');
@@ -6,16 +5,13 @@ const textinput = document.getElementById('textInput');
 const fileSelector = document.getElementById('file-selector');
 const imgPreview = document.getElementById('img-preview-window');
 
-const startCall = document.getElementById('startCall');
-
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
 const url = window.location.href;
 var HOST = url.replace(/(http)(s)?\:\/\//, "ws$2://");
-console.log();
 var firstRun = true;
-var ws = new WebSocket('ws://localhost:80');
+var ws = new WebSocket(HOST);
 var imageNum = 0;
 var connected = false;
 
@@ -24,26 +20,6 @@ console.log("Started");
 fileSelector.addEventListener('change', imagePreview);
 textinput.addEventListener('keydown', sendEnter);
 sendButton.addEventListener('click', sendMessage);
-
-connect.addEventListener('keydown', connectToWS);
-function connectToWS() {
-    if (event.keyCode === 13) {
-        console.log(firstRun);
-        if (!firstRun) {
-            ws.close();
-        }
-        firstRun = false;
-        if (connect.value !== "") {
-            if (checkbox.checked) {
-                ws = new WebSocket('wss://' + connect.value);
-            } else if (!checkbox.checked) {
-                ws = new WebSocket('ws://' + connect.value);
-            }
-        }
-        console.log("Connecting to " + connect.value + "...");
-        recieveMessage();
-    }
-}
 
 function sendMessage() {
     let username = nameInput.value;
