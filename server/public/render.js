@@ -6,6 +6,8 @@ const textinput = document.getElementById('textInput');
 const fileSelector = document.getElementById('file-selector');
 const imgPreview = document.getElementById('img-preview-window');
 
+const startCall = document.getElementById('startCall');
+
 const sendButton = document.getElementById('sendButton');
 const chatarea = document.getElementById('chatarea');
 
@@ -22,6 +24,8 @@ console.log("Started");
 fileSelector.addEventListener('change', imagePreview);
 textinput.addEventListener('keydown', sendEnter);
 sendButton.addEventListener('click', sendMessage);
+
+startCall.addEventListener('click', voicecall);
 
 connect.addEventListener('keydown', connectToWS);
 function connectToWS() {
