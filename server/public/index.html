@@ -9,7 +9,10 @@
     <script defer src="render.js"></script>
   </head>
   <body>
-    <div class="chatbox-header">
+    <div class="container-header">
+      <div class="not-connected">
+        
+      </div>
       <ul id="apptitle">Banana chat</ul>
       <div class="chatbox" id="chatbox">
         <ul class="chatarea" id="chatarea">
@@ -25,7 +28,19 @@
         <div id="rightbox">
           <input type="text" id="nameInput" placeholder="Enter name">
         </div>
+      </div>
+      <div class="img-preview-container">
+        <ul id="img-preview-window">
+
+        </ul>
+      </div>
+      <div class="container-footer">
         <input type="text" id="textInput" placeholder="Enter message...">
+        <div>
+          <label id="file-selector-button" for="file-selector">img</label>
+          <input type=file id="file-selector" name="file-selector" accept="image/*">
+
+        </div>
         <button type="submit" id="sendButton" class="submit">Send</button>
       </div>
     </div>
