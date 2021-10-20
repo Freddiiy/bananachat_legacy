@@ -32,9 +32,9 @@ function sendMessage() {
         if(userInput !== "") {
             let tmp = `<div class="sent-msg"> <p class="current-msg">${userInput}</p> </div>`;
             chatarea.insertAdjacentHTML("beforeend", tmp);
-        
-            let dataArray = ["message", username, userInput];
-            let jsonData= JSON.stringify(dataArray);
+
+            let dataArray = {"datatype": "message", "username": username, "content": userInput}
+            let jsonData = JSON.stringify(dataArray);
             ws.send(jsonData);
         }
     }
@@ -90,8 +90,8 @@ function sendImage() {
         imgElement.appendChild(img);
 
         rawFile = e.target.result;
-
-        let dataArray = ["file", username, rawFile];
+        
+        let dataArray = {"datatype": "image", "username": username, "content": rawFile}
         let jsonData = JSON.stringify(dataArray)
         ws.send(jsonData)
     }
@@ -109,21 +109,21 @@ recieveMessage();
 function recieveMessage() {
     ws.onmessage = ({ data }) => {
         let dataArray = JSON.parse(data);
-        if (dataArray[0] == "message") {
-            let username = dataArray[1];
-            let userInput = dataArray[2];
+        if (dataArray.datatype == "message") {
+            let username = dataArray.username
+            let userInput = dataArray.content;
             let tmp = `<span class="username">${username}</span><div class="recieved-msg"><p class="current-msg">${userInput}</p> </div>`;
             chatarea.insertAdjacentHTML("beforeend", tmp);
 
-        } else if (dataArray[0] == "file") {
-            let username = dataArray[1];
-            let rawData = dataArray[2];
+        } else if (dataArray.datatype == "image") {
+            //let username = dataArray[1];
+            //let rawData = dataArray[2];
 
-            let tmp = `<span class="username">${username}</span><div class="recieved-img"><div class="current-img" id="imageNum-${imageNum}"></div>`;
+            let tmp = `<span class="username">${dataArray.username}</span><div class="recieved-img"><div class="current-img" id="imageNum-${imageNum}"></div>`;
             chatarea.insertAdjacentHTML("beforeend", tmp);
 
             let img = document.createElement("img");
-            img.src = rawData;
+            img.src = dataArray.content;
             var imgElement = document.getElementById("imageNum-" + imageNum);
             imgElement.appendChild(img);
         }
