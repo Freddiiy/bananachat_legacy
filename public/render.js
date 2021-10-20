@@ -110,14 +110,10 @@ function recieveMessage() {
     ws.onmessage = ({ data }) => {
         let dataArray = JSON.parse(data);
         if (dataArray.datatype == "message") {
-            let username = dataArray.username
-            let userInput = dataArray.content;
-            let tmp = `<span class="username">${username}</span><div class="recieved-msg"><p class="current-msg">${userInput}</p> </div>`;
+            let tmp = `<span class="username">${dataArray.username}</span><div class="recieved-msg"><p class="current-msg">${dataArray.content}</p> </div>`;
             chatarea.insertAdjacentHTML("beforeend", tmp);
 
         } else if (dataArray.datatype == "image") {
-            //let username = dataArray[1];
-            //let rawData = dataArray[2];
 
             let tmp = `<span class="username">${dataArray.username}</span><div class="recieved-img"><div class="current-img" id="imageNum-${imageNum}"></div>`;
             chatarea.insertAdjacentHTML("beforeend", tmp);
