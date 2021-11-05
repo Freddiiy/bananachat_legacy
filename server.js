@@ -10,7 +10,7 @@ const port = process.env.PORT || 6969;
 
 //serves the webpage
 app.use(express.static("public"));
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
   console.log("serving webpage");
 });
