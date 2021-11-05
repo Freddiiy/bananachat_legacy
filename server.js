@@ -15,6 +15,7 @@ app.get('*', function (req, res) {
 const wss = new WebSocket.Server({ noServer: true });
 
 wss.on('connection', function connection(ws) {
+  console.log("User connected");
   ws.on('message', function incoming(dataArray) {
     let data = JSON.parse(dataArray);
     wss.clients.forEach(function each(client) {
